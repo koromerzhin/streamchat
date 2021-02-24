@@ -51,6 +51,7 @@ sleep: ## sleep
 	@sleep  $(COMMAND_ARGS)
 
 install: node_modules front/node_modules back/node_modules ## Installation application
+	@make docker image-pull -i
 	@make docker deploy -i
 
 contributors: node_modules ## Contributors
@@ -68,6 +69,8 @@ endif
 docker: isdocker ## Scripts docker
 ifeq ($(COMMAND_ARGS),create-network)
 	@docker network create --driver=overlay $(NETWORK)
+else ifeq ($(COMMAND_ARGS),image-pull)
+	@more docker-compose.yml | grep image: | sed -e "s/^.*image:[[:space:]]//" | while read i; do docker pull $$i; done
 else ifeq ($(COMMAND_ARGS),deploy)
 	@docker stack deploy -c docker-compose.yml $(STACK)
 else ifeq ($(COMMAND_ARGS),ls)
@@ -80,6 +83,7 @@ else
 	@echo "make docker ARGUMENT"
 	@echo "---"
 	@echo "create-network: create network"
+	@echo "image-pull: Get docker image"
 	@echo "deploy: deploy"
 	@echo "ls: docker service"
 	@echo "stop: docker stop"
