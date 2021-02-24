@@ -10,7 +10,7 @@ services:
   back:
     image: koromerzhin/nodejs:15.1.0-socketio
     volumes:
-      - ${PWD}/app:/app
+      - ${PWD}/back:/app
     networks:
       - proxynetwork
       - net
@@ -24,7 +24,7 @@ services:
   front:
     image: koromerzhin/nodejs:1.1.3-quasar
     volumes:
-      - ${PWD}/apps:/app
+      - ${PWD}/front:/app
     networks:
       - proxynetwork
       - net
