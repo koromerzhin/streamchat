@@ -10,7 +10,7 @@ FRONTFULLNAME   := $(FRONT).1.$$(docker service ps -f 'name=$(FRONT)' $(FRONT) -
 BACK           := $(STACK)_back
 BACKFULLNAME   := $(BACK).1.$$(docker service ps -f 'name=$(BACK)' $(BACK) -q --no-trunc | head -n1)
 
-SUPPORTED_COMMANDS := contributors git linter inspect update docker
+SUPPORTED_COMMANDS := contributors git linter inspect update docker logs ssh
 SUPPORTS_MAKE_ARGS := $(findstring $(firstword $(MAKECMDGOALS)), $(SUPPORTED_COMMANDS))
 ifneq "$(SUPPORTS_MAKE_ARGS)" ""
   COMMAND_ARGS := $(wordlist 2,$(words $(MAKECMDGOALS)),$(MAKECMDGOALS))
@@ -154,6 +154,22 @@ else
 	@echo "make inspect ARGUMENT"
 	@echo "---"
 	@echo "stack: logs stack"
+	@echo "front: FRONT"
+	@echo "back: BACK"
+endif
+
+
+.PHONY: ssh
+ssh: ## SSH
+ifeq ($(COMMAND_ARGS),front)
+	@docker exec -it $(FRONTFULLNAME) /bin/bash
+else ifeq ($(COMMAND_ARGS),back)
+	@docker exec -it $(BACKFULLNAME) /bin/bash
+else
+	@echo "ARGUMENT missing"
+	@echo "---"
+	@echo "make ssh ARGUMENT"
+	@echo "---"
 	@echo "front: FRONT"
 	@echo "back: BACK"
 endif
