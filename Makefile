@@ -10,7 +10,7 @@ FRONTFULLNAME   := $(FRONT).1.$$(docker service ps -f 'name=$(FRONT)' $(FRONT) -
 BACK           := $(STACK)_back
 BACKFULLNAME   := $(BACK).1.$$(docker service ps -f 'name=$(BACK)' $(BACK) -q --no-trunc | head -n1)
 
-SUPPORTED_COMMANDS := contributors git linter inspect update docker logs ssh
+SUPPORTED_COMMANDS := contributors git linter inspect update docker logs ssh sleep
 SUPPORTS_MAKE_ARGS := $(findstring $(firstword $(MAKECMDGOALS)), $(SUPPORTED_COMMANDS))
 ifneq "$(SUPPORTS_MAKE_ARGS)" ""
   COMMAND_ARGS := $(wordlist 2,$(words $(MAKECMDGOALS)),$(MAKECMDGOALS))
@@ -45,6 +45,10 @@ ifeq ($(isDocker), 0)
 	@echo "Docker is not launch"
 	exit 1
 endif
+
+.PHONY: sleep
+sleep: ## sleep
+	@sleep  $(COMMAND_ARGS)
 
 install: node_modules front/node_modules back/node_modules ## Installation application
 	@make docker deploy -i
