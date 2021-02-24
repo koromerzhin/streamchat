@@ -1,0 +1,30 @@
+{
+  "name": "@koromerzhin/streamchat",
+  "version": "1.0.0",
+  "description": "Regroupement des messages envoyés depuis les différents live",
+  "scripts": {
+    "linter-markdown": "markdownlint",
+    "contributors": "all-contributors",
+    "changelog": "gitmoji-changelog",
+    "readme": "readme",
+    "licenses": "license-checker"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/koromerzhin/streamchat.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/koromerzhin/streamchat/issues"
+  },
+  "homepage": "https://github.com/koromerzhin/streamchat#readme",
+  "devDependencies": {
+    "all-contributors-cli": "6.20.0",
+    "gitmoji-changelog": "2.2.0",
+    "license-checker": "25.0.1",
+    "markdownlint-cli": "0.26.0",
+    "readme-md-generator": "1.0.0"
+  }
+}
