@@ -1,7 +1,7 @@
 isDocker := $(shell docker info > /dev/null 2>&1 && echo 1)
 
 .DEFAULT_GOAL := help
-STACK         := quasar
+STACK         := streamchat
 NETWORK       := proxynetwork
 
 FRONT           := $(STACK)_front

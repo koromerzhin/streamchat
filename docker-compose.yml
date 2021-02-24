@@ -28,6 +28,8 @@ services:
     networks:
       - proxynetwork
       - net
+    depends_on:
+      - back
     deploy:
       labels:
         - "traefik.enable=true"
