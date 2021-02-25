@@ -28,10 +28,7 @@ back/node_modules: isdocker images back/package.json
 front/node_modules: isdocker images front/package.json
 	$(FRONTRUN) npm install
 
-package-lock.json: package.json
-	@npm install
-
-node_modules: package-lock.json
+node_modules:
 	@npm install
 
 .PHONY: images
