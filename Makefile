@@ -34,6 +34,10 @@ package-lock.json: package.json
 node_modules: package-lock.json
 	@npm install
 
+.PHONY: images
+images: isdocker
+	@make docker image-pull -i
+
 .PHONY: isdocker
 isdocker: ## Docker is launch
 ifeq ($(isDocker), 0)
