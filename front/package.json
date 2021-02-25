@@ -2,7 +2,7 @@
   "name": "apps",
   "version": "0.0.1",
   "description": "A Quasar Framework app",
-  "productName": "Quasar App",
+  "productName": "Stream chat",
   "author": "koromerzhin <308012+koromerzhin@users.noreply.github.com>",
   "private": true,
   "scripts": {

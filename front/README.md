@@ -1,4 +1,4 @@
-# Quasar App (apps)
+# Stream chat (apps)
 
 A Quasar Framework app
 

@@ -117,8 +117,8 @@ module.exports = function (/* ctx */) {
       workboxPluginMode: 'GenerateSW', // 'GenerateSW' or 'InjectManifest'
       workboxOptions: {}, // only for GenerateSW
       manifest: {
-        name: 'Quasar App',
-        short_name: 'Quasar App',
+        name: 'Stream chat',
+        short_name: 'Stream chat',
         description: 'A Quasar Framework app',
         display: 'standalone',
         orientation: 'portrait',
