@@ -34,6 +34,13 @@ Hosts:
 ## Install
 
 ```sh
+cp back/.env.dist back/.env
+```
+
+Generate new [token](http://twitchapps.com/tmi/)
+with all scopes and edit back/.env to add value to TWITCH_PASSWORD and TWITCH_CHANNEL
+
+```sh
 make install
 ```
 
