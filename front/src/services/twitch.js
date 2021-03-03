@@ -227,7 +227,6 @@ export default {
   },
   join (store, data) {
     store.dispatch('users/add', data)
-    console.log('join', data)
   },
   logon (store, data) {
     console.log('logon', data)
@@ -248,7 +247,7 @@ export default {
     console.log('notice', data)
   },
   part (store, data) {
-    console.log('part', data)
+    store.dispatch('users/delete', data)
   },
   ping (store, data) {
     console.log('ping', data)

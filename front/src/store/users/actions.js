@@ -6,5 +6,8 @@ export default {
     if (data.length === 0) {
       store.commit('add', user)
     }
+  },
+  delete (store, user) {
+    store.commit('delete', user)
   }
 }
