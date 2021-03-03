@@ -1,5 +1,3 @@
-export default function () {
-  return {
-    data: []
-  }
+export default {
+  users: []
 }

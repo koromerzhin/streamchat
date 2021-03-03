@@ -1,5 +1,7 @@
 <template>
-  <q-page class="flex flex-center">
+  <q-page>
+    users {{ users.length }}<br />
+    messages {{ messages.length }}<br />
     <a href="https://www.twitch.tv/popout/koromerzhin/chat?popout=" target="_blank">
       Popup
     </a>
@@ -13,8 +15,6 @@ export default {
   name: 'PageIndex',
   data () {
     return {
-      messages: [],
-      users: [],
       socket: io('back-streamchat.traefik.me', {
         withCredentials: true,
         extraHeaders: {
@@ -23,8 +23,16 @@ export default {
       })
     }
   },
+  computed: {
+    users () {
+      return this.$store.getters['users/get']
+    },
+    messages () {
+      return this.$store.getters['messages/get']
+    }
+  },
   mounted () {
-    twitch.launch(this.socket, twitch)
+    twitch.launch(this.socket, twitch, this.$store)
   }
 }
 </script>
