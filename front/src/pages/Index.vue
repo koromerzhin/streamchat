@@ -1,7 +1,18 @@
 <template>
   <q-page>
-    users {{ users.length }}<br />
-    messages {{ messages.length }}<br />
+    <div class="row">
+        <div class="col-2">
+            users {{ users.length }}
+        </div>
+        <div class="col-10">
+            messages {{ messages.length }}
+            <q-list bordered separator>
+              <q-item  v-for="data in messages" :key="data">
+                <q-item-section><b>{{ data.userstate.username }}</b> : {{ data.message }}</q-item-section>
+              </q-item>
+            </q-list>
+        </div>
+    </div>
     <a href="https://www.twitch.tv/popout/koromerzhin/chat?popout=" target="_blank">
       Popup
     </a>
