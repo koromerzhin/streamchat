@@ -53,5 +53,7 @@ services:
     deploy:
       labels:
         - "traefik.enable=true"
-        - "traefik.http.routers.back-streamchat.rule=Host(`streamchat.traefik.me`) && PathPrefix(`/back`)"
+        - "traefik.http.routers.back-streamchat.rule=Host(`back-streamchat.traefik.me`)"
+        - "traefik.http.routers.back-streamchat-tls.tls.domains[0].main=back-streamchat.traefik.me"
+        - "traefik.http.routers.back-streamchat-tls.tls.domains[0].sans=back-streamchat-*.traefik.me"
         - "traefik.http.services.back-streamchat.loadbalancer.server.port=3000"
