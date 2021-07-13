@@ -15,7 +15,7 @@
     "core-js": "3.9.0",
     "quasar": "1.15.4",
     "socket.io-client": "3.1.2",
-    "vue-i18n": "8.22.4"
+    "vue-i18n": "9.1.7"
   },
   "devDependencies": {
     "@quasar/app": "2.1.15",
