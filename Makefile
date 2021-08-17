@@ -3,6 +3,13 @@ STACK   := streamchat
 NETWORK := proxynetwork
 include make/docker/Makefile
 
+COMMANDS_SUPPORTED_COMMANDS := linter
+COMMANDS_SUPPORTS_MAKE_ARGS := $(findstring $(firstword $(MAKECMDGOALS)), $(COMMANDS_SUPPORTED_COMMANDS))
+ifneq "$(COMMANDS_SUPPORTS_MAKE_ARGS)" ""
+  COMMANDS_ARGS := $(wordlist 2,$(words $(MAKECMDGOALS)),$(MAKECMDGOALS))
+  $(eval $(COMMANDS_ARGS):;@:)
+endif
+
 install: node_modules ## Installation application
 	@make docker image-pull -i
 	@make docker deploy -i
