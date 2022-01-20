@@ -1,6 +1,5 @@
 include make/general/Makefile
 STACK   := streamchat
-NETWORK := proxylampy
 include make/docker/Makefile
 
 COMMANDS_SUPPORTED_COMMANDS := linter
