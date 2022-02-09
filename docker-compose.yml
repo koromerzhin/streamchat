@@ -7,28 +7,11 @@ networks:
     driver: overlay
     attachable: true
 services:
-  frontexec:
-    image: koromerzhin/nodejs:1.1.3-quasar
-    volumes:
-      - ${PWD}/front:/app
-    command: sh -c "npm install"
-    deploy:
-      restart_policy:
-        condition: none
-      labels:
-        - "traefik.enable=false"
-  backexec:
-    image: koromerzhin/nodejs:15.1.0
-    volumes:
-      - ${PWD}/back:/app
-    command: sh -c "npm install"
-    deploy:
-      restart_policy:
-        condition: none
-      labels:
-        - "traefik.enable=false"
   front:
-    image: koromerzhin/nodejs:1.1.3-quasar
+    image: node:15.14.0
+    working_dir: /app
+    command: >
+      sh -c "npm install -g @quasar/cli@1.2.2 && npm install && npm run start"
     volumes:
       - ${PWD}/front:/app
     networks:
@@ -39,12 +22,15 @@ services:
     deploy:
       labels:
         - "traefik.enable=true"
-        - "traefik.http.routers.streamchat.rule=HostRegexp(`streamchat.traefik.me`, `streamchat.{ip:.*}.traefik.me`)"
+        - "traefik.http.routers.streamchat.rule=Host(`streamchat.traefik.me`)"
         - "traefik.http.routers.streamchat-tls.tls.domains[0].main=streamchat.traefik.me"
-        - "traefik.http.routers.streamchat-tls.tls.domains[0].sans=streamchat-*.traefik.me"
+        - "traefik.http.routers.streamchat.tls=true"
         - "traefik.http.services.streamchat.loadbalancer.server.port=80"
   back:
-    image: koromerzhin/nodejs:15.1.0
+    image: node:15.14.0
+    working_dir: /app
+    command: >
+      sh -c "npm install && npm run start"
     volumes:
       - ${PWD}/back:/app
     networks:
@@ -53,7 +39,7 @@ services:
     deploy:
       labels:
         - "traefik.enable=true"
-        - "traefik.http.routers.back-streamchat.rule=HostRegexp(`back-streamchat.traefik.me`, `streamchat.{ip:.*}.traefik.me`)"
-        - "traefik.http.routers.back-streamchat-tls.tls.domains[0].main=back-streamchat.traefik.me"
-        - "traefik.http.routers.back-streamchat-tls.tls.domains[0].sans=back-streamchat-*.traefik.me"
+        - "traefik.http.routers.back-streamchat.rule=Host(`streamchat.traefik.me`) && PathPrefix(`/back`)"
+        - "traefik.http.routers.back-streamchat-tls.tls.domains[0].main=streamchat.traefik.me"
+        - "traefik.http.routers.back-streamchat.tls=true"
         - "traefik.http.services.back-streamchat.loadbalancer.server.port=3000"
