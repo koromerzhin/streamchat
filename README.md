@@ -31,6 +31,14 @@ Hosts:
 - streamchat.traefik.me
 - back-streamchat.traefik.me
 
+## Download
+
+```sh
+git clone git@github.com:koromerzhin/streamchat.git streamchat
+cd streamchat
+git submodule update --init
+```
+
 ## Install
 
 ```sh
