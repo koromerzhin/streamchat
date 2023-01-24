@@ -22,7 +22,7 @@ jobs:
       - name: Install npm dependencies
         run: npm install
       - name: 'set .env'
-        run: 'cp apps/.env.test apps/.env'
+        run: 'cp back/.env.dist back/.env'
       - name: 'set .env'
         run: 'cp .env.example .env'
       - name: 'Launch Lampy'
