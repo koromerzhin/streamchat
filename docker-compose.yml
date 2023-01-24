@@ -1,8 +1,6 @@
 
 version: "3.4"
 networks:
-  proxylampy:
-    external: true
   net:
     driver: overlay
     attachable: true
@@ -15,17 +13,9 @@ services:
     volumes:
       - ${PWD}/front:/app
     networks:
-      - proxylampy
       - net
     depends_on:
       - back
-    deploy:
-      labels:
-        - "traefik.enable=true"
-        - "traefik.http.routers.streamchat.rule=Host(`streamchat.traefik.me`)"
-        - "traefik.http.routers.streamchat-tls.tls.domains[0].main=streamchat.traefik.me"
-        - "traefik.http.routers.streamchat.tls=true"
-        - "traefik.http.services.streamchat.loadbalancer.server.port=80"
   back:
     image: node:15.14.0
     working_dir: /app
@@ -34,12 +24,4 @@ services:
     volumes:
       - ${PWD}/back:/app
     networks:
-      - proxylampy
       - net
-    deploy:
-      labels:
-        - "traefik.enable=true"
-        - "traefik.http.routers.back-streamchat.rule=Host(`streamchat.traefik.me`) && PathPrefix(`/back`)"
-        - "traefik.http.routers.back-streamchat-tls.tls.domains[0].main=streamchat.traefik.me"
-        - "traefik.http.routers.back-streamchat.tls=true"
-        - "traefik.http.services.back-streamchat.loadbalancer.server.port=3000"
